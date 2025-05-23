@@ -1,0 +1,726 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 262 83.3% 57.8%; /* Purple */
+    --primary-rgb: 149, 76, 233;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 262 83.3% 57.8%; /* Match primary */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 262 83.3% 57.8%; /* Match primary */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 83.3% 67.8%; /* Brighter purple for dark mode */
+    --primary-rgb: 169, 106, 243;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 262 83.3% 67.8%; /* Match primary */
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 262 83.3% 67.8%; /* Match primary */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Poppins", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+
+  .font-logo {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Add padding for fixed header */
+  }
+
+  section {
+    @apply py-16 px-4;
+  }
+
+  /* Make sure sections have proper background */
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    background-color: hsl(var(--background));
+  }
+
+  /* Make sure services section has proper background */
+  #services {
+    background-color: hsl(var(--background));
+  }
+
+  /* Ensure container is properly centered */
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease forwards;
+}
+
+/* Loader animations */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loader-letter {
+  display: inline-block;
+  opacity: 0;
+}
+
+.loader-letter-animate {
+  animation: scaleIn 0.6s forwards, fadeOut 0.5s forwards 1.2s;
+}
+
+/* Hero animations */
+@keyframes letterAnimation {
+  0% {
+    transform: translateY(1.1em) translateX(0.55em) rotateZ(180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) translateX(0) rotateZ(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title .letter {
+  display: inline-block;
+  opacity: 0;
+}
+
+.hero-title .letter-animate {
+  animation: letterAnimation 0.75s forwards;
+}
+
+.hero-subtitle,
+.hero-cta,
+.hero-scroll {
+  opacity: 0;
+}
+
+.hero-subtitle-animate {
+  animation: fadeInUp 0.5s forwards;
+}
+
+.hero-cta-animate {
+  animation: fadeInUp 0.5s forwards;
+}
+
+.hero-scroll-animate {
+  animation: fadeInUp 0.5s forwards;
+}
+
+/* Hero content animation */
+.hero-content {
+  opacity: 0;
+  animation: fadeInUp 1s forwards;
+}
+
+.hero-image {
+  opacity: 0;
+  animation: fadeInRight 1s forwards 0.3s;
+}
+
+/* Tech badge animations */
+@keyframes techBadgeAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tech-badge {
+  opacity: 0;
+  animation: techBadgeAnimation 0.5s forwards 1s;
+}
+
+/* Hero particle animations */
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.hero-particle {
+  opacity: 0;
+}
+
+.hero-particle-animate {
+  animation: particleFloat var(--duration, 15s) ease-in-out infinite;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid hsl(var(--primary));
+  white-space: nowrap;
+  animation: typing 3s steps(40) 1s forwards, blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: hsl(var(--primary));
+  }
+}
+
+/* Scale in animation */
+@keyframes scale-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 1s ease-out 1s forwards;
+}
+
+/* Profile image container animations */
+.profile-image-container {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.profile-image-container:hover {
+  transform: scale(1.05);
+}
+
+/* About animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.about-animate {
+  opacity: 1; /* Changed from 0 to 1 to ensure content is visible */
+}
+
+.about-animate-start {
+  animation: fadeInUp 1s forwards;
+}
+
+.about-image {
+  opacity: 1; /* Changed from 0 to 1 to ensure image is visible */
+}
+
+.about-image-animate {
+  animation: fadeInRight 1s forwards;
+}
+
+/* Skill badge animations */
+.skill-badge {
+  opacity: 1; /* Changed from 0 to 1 to ensure badges are visible */
+}
+
+.skill-badge-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Achievement card animations */
+.achievement-card {
+  opacity: 1; /* Changed from 0 to 1 to ensure cards are visible */
+}
+
+.achievement-card-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service card animations */
+.service-card {
+  opacity: 1; /* Changed from 0 to 1 to ensure cards are visible */
+}
+
+.service-card-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Floating element animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-element {
+  opacity: 0.5;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 5s ease-in-out infinite;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--primary-rgb), 0.1) 25%,
+    rgba(var(--primary-rgb), 0.2) 50%,
+    rgba(var(--primary-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 10s linear infinite;
+}
+
+/* Scale animation */
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale {
+  animation: scale 5s ease-in-out infinite;
+}
+
+/* Logo animations */
+@keyframes logoA1 {
+  0% {
+    transform: translateY(50px) rotateX(90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logoA2 {
+  0% {
+    transform: translateY(-50px) rotateX(-90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logoK {
+  0% {
+    transform: translateX(30px) rotateY(90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logoA3 {
+  0% {
+    transform: translateY(50px) rotateZ(180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logoS {
+  0% {
+    transform: scale(0) rotateZ(-90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes logoH {
+  0% {
+    transform: translateX(-30px) rotateY(-90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Navigation animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-item {
+  opacity: 0;
+}
+
+.nav-item-animate {
+  animation: fadeInDown 0.8s forwards;
+}
+
+.mobile-menu-item {
+  opacity: 0;
+}
+
+.mobile-menu-item-animate {
+  animation: fadeInDown 0.5s forwards;
+}
+
+/* Add these 3D transform utilities to the existing CSS file */
+
+/* 3D Transform Effects */
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+.hover-3d {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: perspective(1000px) rotateX(0) rotateY(0) scale(1);
+  will-change: transform;
+}
+
+.hover-3d:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hover-3d-strong {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform: perspective(1000px) rotateX(0) rotateY(0) scale(1);
+  will-change: transform;
+}
+
+.hover-3d-strong:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hover-3d-tilt {
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Card 3D hover effect */
+.card-3d {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 15px 30px rgba(var(--primary-rgb), 0.15);
+}
+
+/* Button 3D effect */
+.button-3d {
+  position: relative;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.button-3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateZ(-10px);
+  border-radius: inherit;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.button-3d:hover {
+  transform: translateY(-3px) translateZ(10px);
+}
+
+.button-3d:hover::before {
+  transform: translateZ(-15px);
+  opacity: 1;
+}
+
+.button-3d:active {
+  transform: translateY(-1px) translateZ(5px);
+}
+
+/* Floating card effect */
+.floating-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(var(--primary-rgb), 0.1), 0 10px 10px -5px rgba(var(--primary-rgb), 0.04);
+}
+
+/* Tilt effect based on mouse position */
+.tilt-card {
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+}
+
+/* Magnetic element */
+.magnetic-element {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
